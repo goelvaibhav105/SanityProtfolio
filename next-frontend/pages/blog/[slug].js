@@ -20,7 +20,7 @@ const Post = ({ blog, profile }) => {
     <Head>
       <meta charset="utf-8" />
 
-      <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+      <meta content="IE=edge,chrome=1"  />
 
       <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
 
