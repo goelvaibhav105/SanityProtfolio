@@ -76,7 +76,7 @@ const NavBar = ({profile}) => {
               </ul>
             </div>
             <div className="block lg:hidden">
-              <button>
+              <button onClick={()=>{console.log('hey')}}>
                 <i className="bx bx-menu text-4xl text-white"></i>
               </button>
             </div>

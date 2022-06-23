@@ -10,6 +10,7 @@ import skills from './skills'
 import goodAt from './goodAt'
 import myDetails from './myDetails'
 import work from './work'
+import statistics from './statistics'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -19,6 +20,6 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     /* Your types here! */
-    blog, author, profile,skills,goodAt,myDetails,work
+    blog, author, profile,skills,goodAt,myDetails,work,statistics
   ]),
 })
