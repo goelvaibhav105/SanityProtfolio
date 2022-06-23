@@ -49,7 +49,7 @@ const Post = ({ blog, profile }) => {
 
       <meta name="twitter:site" content="@tailwindmade" />
 
-      <link crossorigin="crossorigin" href="https://fonts.gstatic.com" rel="preconnect" />
+      <link  href="https://fonts.gstatic.com" rel="preconnect" />
 
       <link as="style"
         href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Raleway:wght@400;500;600;700&display=swap"
@@ -61,7 +61,7 @@ const Post = ({ blog, profile }) => {
 
       <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
 
-      <link crossorigin="anonymous" href="/assets/styles/main.min.css" media="screen" rel="stylesheet" />
+      <link href="/assets/styles/main.min.css" media="screen" rel="stylesheet" />
 
       <script defer src="https://unpkg.com/@alpine-collective/toolkit@1.0.0/dist/cdn.min.js"></script>
 

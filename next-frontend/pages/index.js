@@ -59,7 +59,7 @@ export default function Home({ blogs, profile,skills,goodAt,myDetails,work,stati
         <meta name="twitter:site" content="@tailwindmade" />
 
         <link
-          crossorigin="crossorigin"
+  
           href="https://fonts.gstatic.com"
           rel="preconnect" />
 
@@ -77,7 +77,7 @@ export default function Home({ blogs, profile,skills,goodAt,myDetails,work,stati
           rel="stylesheet" />
 
         <link
-          crossorigin="anonymous"
+      
           href="/assets/styles/main.min.css"
           media="screen"
           rel="stylesheet" />
