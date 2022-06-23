@@ -2,25 +2,20 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { createClient } from "next-sanity";
-import PortableText from "react-portable-text"
+
 import Script from "next/script"
 import { useEffect } from 'react';
 import imageUrlBuilder from '@sanity/image-url'
 import Link from 'next/link'
+import NavBar from '../components/NavBar';
 
-export default function Home({ blogs }) {
+export default function Home({ blogs, profile,skills,goodAt,myDetails,work}) {
   const client = createClient({
     projectId: "6j545gpg",
     dataset: "production",
     useCdn: false
   });
   const builder = imageUrlBuilder(client)
-  
-  useEffect(() => {
-    console.log("thsnks") 
-    
-  }, [])
-  
   return (
     <><>
       <Script src="/assets/js/main.js"></Script>
@@ -33,7 +28,7 @@ export default function Home({ blogs }) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
           name="viewport" />
 
-        <title>Homepage | Atom Template</title>
+        <title>{profile.title} - Developer | Coder </title>
 
         <meta property="og:title" content="Homepage | Atom Template" />
 
@@ -95,90 +90,8 @@ export default function Home({ blogs }) {
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 
-      </Head>
-      <div className="w-full z-50 top-0 py-3 sm:py-5  absolute ">
-        <div className="container flex items-center justify-between">
-          <div>
-            <a href="/">
-              <img src="/assets/img/logo.svg" className="w-24 lg:w-48" alt="logo image" />
-            </a>
-          </div>
-          <div className="hidden lg:block">
-            <ul className="flex items-center">
-
-              <li className="group pl-6">
-
-                <a href='#about'><span
-                  className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">About</span></a>
-
-                <span className="block h-0.5 w-full bg-transparent group-hover:bg-yellow"></span>
-              </li>
-
-              <li className="group pl-6">
-
-                <span
-                  className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Services</span>
-
-                <span className="block h-0.5 w-full bg-transparent group-hover:bg-yellow"></span>
-              </li>
-
-              <li className="group pl-6">
-
-              <a href='#portfolio'><span
-                  className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Portfolio</span></a>
-
-                <span className="block h-0.5 w-full bg-transparent group-hover:bg-yellow"></span>
-              </li>
-
-              <li className="group pl-6">
-
-              <a href='#clients'><span
-                  className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Clients</span></a>
-
-                <span className="block h-0.5 w-full bg-transparent group-hover:bg-yellow"></span>
-              </li>
-
-              <li className="group pl-6">
-
-              <a href='#work'><span
-                  className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Work</span></a>
-
-                <span className="block h-0.5 w-full bg-transparent group-hover:bg-yellow"></span>
-              </li>
-
-              <li className="group pl-6">
-
-              <a href='#statistics'><span
-                  className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Statistics</span></a>
-
-                <span className="block h-0.5 w-full bg-transparent group-hover:bg-yellow"></span>
-              </li>
-
-              <li className="group pl-6">
-
-              <a href='#blog'><span
-                  className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Blog</span></a>
-
-                <span className="block h-0.5 w-full bg-transparent group-hover:bg-yellow"></span>
-              </li>
-
-              <li className="group pl-6">
-
-                <span
-                  className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Contact</span>
-
-                <span className="block h-0.5 w-full bg-transparent group-hover:bg-yellow"></span>
-              </li>
-
-            </ul>
-          </div>
-          <div className="block lg:hidden">
-            <button>
-              <i className="bx bx-menu text-4xl text-white"></i>
-            </button>
-          </div>
-        </div>
-      </div>
+      </Head> 
+      <NavBar profile={profile} />
       <div
         className="pointer-events-none fixed inset-0 z-70 min-h-screen bg-black bg-opacity-70 opacity-0 transition-opacity lg:hidden" /> 
       <div className="hidden absolute right-0 min-h-screen w-2/3 bg-primary py-4 px-8 shadow md:w-1/3">
@@ -209,18 +122,11 @@ export default function Home({ blogs }) {
 
           </li>
 
-          <li className="py-2">
-
-            <span
-              className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Clients</span>
-
-          </li>
 
           <li className="py-2">
 
             <span
-              className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Work</span>
-
+              className="cursor-pointer pt-0.5 font-header font-semibold uppercase text-white">Details</span>
           </li>
 
           <li className="py-2">
@@ -255,11 +161,11 @@ export default function Home({ blogs }) {
         <div className="container relative z-30 pt-20 pb-12 sm:pt-56 sm:pb-48 lg:pt-64 lg:pb-48">
           <div className="flex flex-col items-center justify-center lg:flex-row">
             <div className="rounded-full border-8 border-primary shadow-xl">
-              <img src="/assets/img/blog-author.jpg" className="h-48 rounded-full sm:h-56" alt="author" />
+              <img src={builder.image(profile.image).width(200).url()} className="h-48 rounded-full sm:h-56" alt="author" />
             </div>
             <div className="pt-8 sm:pt-10 lg:pl-8 lg:pt-0">
               <h1 className="text-center font-header text-4xl text-white sm:text-left sm:text-5xl md:text-6xl">
-                Hello I'm Christy Smith!
+                Hello I'm {profile.name}!
               </h1>
               <div className="flex flex-col justify-center pt-3 sm:flex-row sm:pt-5 lg:justify-start">
                 <div className="flex items-center justify-center pl-0 sm:justify-start md:pl-1">
@@ -269,23 +175,17 @@ export default function Home({ blogs }) {
                   </div>
                 </div>
                 <div className="flex items-center justify-center pt-5 pl-2 sm:justify-start sm:pt-0">
-                  <a href="/">
-                    <i className="bx bxl-facebook-square text-2xl text-white hover:text-yellow"></i>
-                  </a>
-                  <a href="/" className="pl-4">
-                    <i className="bx bxl-twitter text-2xl text-white hover:text-yellow"></i>
-                  </a>
-                  <a href="/" className="pl-4">
-                    <i className="bx bxl-dribbble text-2xl text-white hover:text-yellow"></i>
-                  </a>
-                  <a href="/" className="pl-4">
+                  <a href={profile.linkdenLink} target="_blank" className="pl-4 cursor-pointer">
                     <i className="bx bxl-linkedin text-2xl text-white hover:text-yellow"></i>
                   </a>
-                  <a href="/" className="pl-4">
+                  <a href={profile.instagramLink}  target="_blank"  className="pl-4 cursor-pointer">
                     <i className="bx bxl-instagram text-2xl text-white hover:text-yellow"></i>
                   </a>
                 </div>
               </div>
+                <Link href={'/blogs'}><div className="buttons text-center md:text-left">
+                  <button className='bg-purple-600 text-white border-2 px-4 py-1 my-4 rounded-2xl'>All Blogs</button>
+                </div></Link>
             </div>
           </div>
         </div>
@@ -298,16 +198,11 @@ export default function Home({ blogs }) {
               Who am I?
             </h2>
             <h4 className="pt-6 font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl">
-              I'm Christy Smith, a Web Designer & Photographer
+              {profile.name}
             </h4>
+  
             <p className="pt-6 font-body leading-relaxed text-grey-20">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-              commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-              occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-              mollit anim id est laborum.
+              {profile.description}
             </p>
             <div className="flex flex-col justify-center pt-6 sm:flex-row lg:justify-start">
               <div className="flex items-center justify-center sm:justify-start">
@@ -319,65 +214,30 @@ export default function Home({ blogs }) {
                 </div>
               </div>
               <div className="flex items-center justify-center pt-5 pl-2 sm:justify-start sm:pt-0">
-                <a href="/">
-                  <i className="bx bxl-facebook-square text-2xl text-primary hover:text-yellow"></i>
-                </a>
-                <a href="/" className="pl-4">
-                  <i className="bx bxl-twitter text-2xl text-primary hover:text-yellow"></i>
-                </a>
-                <a href="/" className="pl-4">
-                  <i className="bx bxl-dribbble text-2xl text-primary hover:text-yellow"></i>
-                </a>
-                <a href="/" className="pl-4">
+               
+                <a href={profile.linkdenLink} target="_blank" className="pl-4">
                   <i className="bx bxl-linkedin text-2xl text-primary hover:text-yellow"></i>
                 </a>
-                <a href="/" className="pl-4">
+                <a href={profile.instagramLink} target="_blank"  className="pl-4">
                   <i className="bx bxl-instagram text-2xl text-primary hover:text-yellow"></i>
                 </a>
               </div>
             </div>
           </div>
           <div className="w-full pl-0 pt-10 sm:w-3/4 lg:w-2/5 lg:pl-12 lg:pt-0">
-            <div>
+          {skills.map((item) => { 
+            return (  <div className='pt-6'>
               <div className="flex items-end justify-between">
                 <h4 className="font-body font-semibold uppercase text-black">
-                  HTML & CSS
+                  {item.skill}
                 </h4>
-                <h3 className="font-body text-3xl font-bold text-primary">85%</h3>
+                <h3 className="font-body text-3xl font-bold text-primary">{item.percentage}%</h3>
               </div>
               <div className="mt-2 h-3 w-full rounded-full bg-lila">
-                <div className="h-3 rounded-full bg-primary" style={{"width": "85%"}}></div>
+                <div className="h-3 rounded-full bg-primary" style={{"width": `${item.percentage}%`}}></div>
               </div>
-            </div>
-            <div className="pt-6">
-              <div className="flex items-end justify-between">
-                <h4 className="font-body font-semibold uppercase text-black">Python</h4>
-                <h3 className="font-body text-3xl font-bold text-primary">70%</h3>
-              </div>
-              <div className="mt-2 h-3 w-full rounded-full bg-lila">
-                <div className="h-3 rounded-full bg-primary" style={{ "width": "70%" }}></div>
-              </div>
-            </div>
-            <div className="pt-6">
-              <div className="flex items-end justify-between">
-                <h4 className="font-body font-semibold uppercase text-black">
-                  Javascript
-                </h4>
-                <h3 className="font-body text-3xl font-bold text-primary">98%</h3>
-              </div>
-              <div className="mt-2 h-3 w-full rounded-full bg-lila">
-                <div className="h-3 rounded-full bg-primary" style={{"width": "98%"}}></div>
-              </div>
-            </div>
-            <div className="pt-6">
-              <div className="flex items-end justify-between">
-                <h4 className="font-body font-semibold uppercase text-black">Figma</h4>
-                <h3 className="font-body text-3xl font-bold text-primary">91%</h3>
-              </div>
-              <div className="mt-2 h-3 w-full rounded-full bg-lila">
-                <div className="h-3 rounded-full bg-primary" style={{ "width": "91%" }}></div>
-              </div>
-            </div>
+            </div>)
+          })}
           </div>
         </div>
       </div>
@@ -387,191 +247,66 @@ export default function Home({ blogs }) {
           Here's what I'm good at
         </h2>
         <h3 className="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl">
-          These are the services Ioffer
+          End result of my skills 
         </h3>
 
         <div className="grid grid-cols-1 gap-6 pt-10 sm:grid-cols-2 md:gap-10 md:pt-12 lg:grid-cols-3">
-          <div className="group rounded px-8 py-12 shadow hover:bg-primary">
+        {goodAt.map((item) => { 
+            return (    <div className="group rounded px-8 py-12 shadow hover:bg-primary">
             <div className="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
               <div className="hidden group-hover:block">
-                <img src="/assets/img/icon-development-white.svg" alt="development icon" />
+                <img src={builder.image(item.image).width(200).url()} alt="development icon" />
               </div>
               <div className="block group-hover:hidden">
-                <img src="/assets/img/icon-development-black.svg" alt="development icon" />
+                <img src={builder.image(item.image).width(200).url()} alt="development icon" />
               </div>
             </div>
             <div className="text-center">
               <h3 className="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl">
-                WEB DEVELOPMENT
+                {item.title}
               </h3>
               <p className="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                {item.description}
               </p>
             </div>
-          </div>
-          <div className="group rounded px-8 py-12 shadow hover:bg-primary">
-            <div className="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-              <div className="hidden group-hover:block">
-                <img src="/assets/img/icon-content-white.svg" alt="content marketing icon" />
-              </div>
-              <div className="block group-hover:hidden">
-                <img src="/assets/img/icon-content-black.svg" alt="content marketing icon" />
-              </div>
-            </div>
-            <div className="text-center">
-              <h3 className="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl">
-                Technical Writing
-              </h3>
-              <p className="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </div>
-          </div>
-          <div className="group rounded px-8 py-12 shadow hover:bg-primary">
-            <div className="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-              <div className="hidden group-hover:block">
-                <img src="/assets/img/icon-mobile-white.svg" alt="Mobile Application icon" />
-              </div>
-              <div className="block group-hover:hidden">
-                <img src="/assets/img/icon-mobile-black.svg" alt="Mobile Application icon" />
-              </div>
-            </div>
-            <div className="text-center">
-              <h3 className="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl">
-                Mobile Development
-              </h3>
-              <p className="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </div>
-          </div>
-          <div className="group rounded px-8 py-12 shadow hover:bg-primary">
-            <div className="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-              <div className="hidden group-hover:block">
-                <img src="/assets/img/icon-email-white.svg" alt="Email Marketing icon" />
-              </div>
-              <div className="block group-hover:hidden">
-                <img src="/assets/img/icon-email-black.svg" alt="Email Marketing icon" />
-              </div>
-            </div>
-            <div className="text-center">
-              <h3 className="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl">
-                Email Development
-              </h3>
-              <p className="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </div>
-          </div>
-          <div className="group rounded px-8 py-12 shadow hover:bg-primary">
-            <div className="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-              <div className="hidden group-hover:block">
-                <img src="/assets/img/icon-design-white.svg" alt="Theme Design icon" />
-              </div>
-              <div className="block group-hover:hidden">
-                <img src="/assets/img/icon-design-black.svg" alt="Theme Design icon" />
-              </div>
-            </div>
-            <div className="text-center">
-              <h3 className="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl">
-                Graphic Design
-              </h3>
-              <p className="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </div>
-          </div>
-          <div className="group rounded px-8 py-12 shadow hover:bg-primary">
-            <div className="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-              <div className="hidden group-hover:block">
-                <img src="/assets/img/icon-graphics-white.svg" alt="Graphic Design icon" />
-              </div>
-              <div className="block group-hover:hidden">
-                <img src="/assets/img/icon-graphics-black.svg" alt="Graphic Design icon" />
-              </div>
-            </div>
-            <div className="text-center">
-              <h3 className="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl">
-                Web Design
-              </h3>
-              <p className="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-            </div>
-          </div>
+          </div> )})}
         </div>
       </div>
 
       <div className="container py-16 md:py-20" id="portfolio">
         <h2 className="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl">
-          Check out my Portfolio
+          Check out my Work
         </h2>
         <h3 className="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl">
-          Here's what I have done with the past
+          Here's what I have done in the past
         </h3>
 
         <div className="mx-auto grid w-full grid-cols-1 gap-8 pt-12 sm:w-3/4 md:gap-10 lg:w-full lg:grid-cols-2">
-          <a href="/" className="mx-auto transform transition-all hover:scale-105 md:mx-0">
-            <img src="/assets/img/portfolio-apple.jpeg" className="w-full shadow" alt="portfolio image" />
-          </a>
-          <a href="/" className="mx-auto transform transition-all hover:scale-105 md:mx-0">
-            <img src="/assets/img/portfolio-stripe.jpeg" className="w-full shadow" alt="portfolio image" />
-          </a>
-          <a href="/" className="mx-auto transform transition-all hover:scale-105 md:mx-0">
-            <img src="/assets/img/portfolio-fedex.jpeg" className="w-full shadow" alt="portfolio image" />
-          </a>
-          <a href="/" className="mx-auto transform transition-all hover:scale-105 md:mx-0">
-            <img src="/assets/img/portfolio-microsoft.jpeg" className="w-full shadow" alt="portfolio image" />
-          </a>
-        </div>
-      </div>
-
-      <div className="bg-grey-50" id="clients">
-        <div className="container py-16 md:py-20">
-          <div className="mx-auto w-full sm:w-3/4 lg:w-full">
-            <h2 className="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl">
-              My latest clients
-            </h2>
-            <div className="flex flex-wrap items-center justify-center pt-4 sm:pt-4">
-              <span className="m-8 block">
-                <img src="/assets/img/logo-coca-cola.svg" alt="client logo" className="mx-auto block h-12 w-auto" />
-              </span>
-              <span className="m-8 block">
-                <img src="/assets/img/logo-apple.svg" alt="client logo" className="mx-auto block h-12 w-auto" />
-              </span>
-
-              <span className="m-8 block">
-                <img src="/assets/img/logo-netflix.svg" alt="client logo" className="mx-auto block h-12 w-auto" />
-              </span>
-
-              <span className="m-8 block">
-                <img src="/assets/img/logo-amazon.svg" alt="client logo" className="mx-auto block h-12 w-auto" />
-              </span>
-
-              <span className="m-8 block">
-                <img src="/assets/img/logo-stripe.svg" alt="client logo" className="mx-auto block h-12 w-auto" />
-              </span>
-            </div>
-          </div>
+        {work.map((item) => { 
+            return (  
+             <a href={item.link}  target='_blank' className="mx-auto transform transition-all hover:scale-105 md:mx-0">
+            <img src={builder.image(item.image).width(200).url()}  className="w-full shadow" alt="portfolio image" />
+          </a>)})}
         </div>
       </div>
 
       <div className="container py-16 md:py-20" id="work">
         <h2 className="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl">
-          My work experience
+          My Details
         </h2>
         <h3 className="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl">
-          Here's what I did before freelancing
+          Here's my all the information
         </h3>
 
         <div className="relative mx-auto mt-12 flex w-full flex-col lg:w-2/3">
           <span className="left-2/5 absolute inset-y-0 ml-10 hidden w-0.5 bg-grey-40 md:block"></span>
-
+          {myDetails.map((item) => { 
+            return ( 
           <div className="mt-8 flex flex-col text-center md:flex-row md:text-left">
             <div className="md:w-2/5">
               <div className="flex justify-center md:justify-start">
                 <span className="shrink-0">
-                  <img src="/assets/img/logo-spotify.svg" className="h-auto w-32" alt="company logo" />
+                  <img src={builder.image(item.image).width(200).url()} className="h-auto w-32" alt="company logo" />
                 </span>
                 <div className="relative ml-3 hidden w-full md:block">
                   <span className="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 transform bg-grey-70"></span>
@@ -586,86 +321,20 @@ export default function Home({ blogs }) {
                 <div className="mt-1 flex">
                   <i className="bx bxs-right-arrow hidden text-primary md:block"></i>
                   <div className="md:-mt-1 md:pl-8">
-                    <span className="block font-body font-bold text-grey-40">Apr 2015 - Mar 2018</span>
-                    <span className="block pt-2 font-header text-xl font-bold uppercase text-primary">Frontend
-                      Developer</span>
+                    <span className="block font-body font-bold text-grey-40">{item.duration}</span>
+                    <span className="block pt-2 font-header text-xl font-bold uppercase text-primary">
+                    {item.about}</span>
                     <div className="pt-2">
-                      <span className="block font-body text-black">Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit.
-                        Vestibulum mattis felis vitae risus pulvinar tincidunt. Nam ac
-                        venenatis enim.</span>
+                      <span className="block font-body text-black">
+                      {item.description}
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="mt-8 flex flex-col text-center md:flex-row md:text-left">
-            <div className="md:w-2/5">
-              <div className="flex justify-center md:justify-start">
-                <span className="shrink-0">
-                  <img src="/assets/img/logo-microsoft.svg" className="h-auto w-32" alt="company logo" />
-                </span>
-                <div className="relative ml-3 hidden w-full md:block">
-                  <span className="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 transform bg-grey-70"></span>
-                </div>
-              </div>
-            </div>
-            <div className="md:w-3/5">
-              <div className="relative flex md:pl-18">
-                <span
-                  className="absolute left-8 top-1 hidden h-4 w-4 rounded-full border-2 border-grey-40 bg-white md:block"></span>
-
-                <div className="mt-1 flex">
-                  <i className="bx bxs-right-arrow hidden text-primary md:block"></i>
-                  <div className="md:-mt-1 md:pl-8">
-                    <span className="block font-body font-bold text-grey-40">Mar 2018 - September 2019</span>
-                    <span className="block pt-2 font-header text-xl font-bold uppercase text-primary">Software
-                      Engineer</span>
-                    <div className="pt-2">
-                      <span className="block font-body text-black">Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit.
-                        Vestibulum mattis felis vitae risus pulvinar tincidunt. Nam ac
-                        venenatis enim.</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="mt-8 flex flex-col text-center md:flex-row md:text-left">
-            <div className="md:w-2/5">
-              <div className="flex justify-center md:justify-start">
-                <span className="shrink-0">
-                  <img src="/assets/img/logo-fedex.svg" className="h-auto w-32" alt="company logo" />
-                </span>
-                <div className="relative ml-3 hidden w-full md:block">
-                  <span className="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 transform bg-grey-70"></span>
-                </div>
-              </div>
-            </div>
-            <div className="md:w-3/5">
-              <div className="relative flex md:pl-18">
-                <span
-                  className="absolute left-8 top-1 hidden h-4 w-4 rounded-full border-2 border-grey-40 bg-white md:block"></span>
-
-                <div className="mt-1 flex">
-                  <i className="bx bxs-right-arrow hidden text-primary md:block"></i>
-                  <div className="md:-mt-1 md:pl-8">
-                    <span className="block font-body font-bold text-grey-40">October 2019 - Feb 2021</span>
-                    <span className="block pt-2 font-header text-xl font-bold uppercase text-primary">DevOps
-                      Engineer</span>
-                    <div className="pt-2">
-                      <span className="block font-body text-black">Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit.
-                        Vestibulum mattis felis vitae risus pulvinar tincidunt. Nam ac
-                        venenatis enim.</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </div>)})}
+         
         </div>
       </div>
 
@@ -740,7 +409,7 @@ export default function Home({ blogs }) {
       <div className="bg-grey-50" id="blog">
         <div className="container py-16 md:py-20">
           <h2 className="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl">
-            I also like to write
+            I also like to write Blogs
           </h2>
           <h4 className="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl">
             Check out my latest posts!
@@ -801,20 +470,14 @@ export default function Home({ blogs }) {
 
       <div className="container py-16 md:py-20" id="contact">
         <h2 className="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl">
-          Here's a contact form
+          Here's my contact 
         </h2>
         <h4 className="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl">
           Have Any Questions?
         </h4>
         <div className="mx-auto w-full pt-5 text-center sm:w-2/3 lg:pt-6">
-          <p className="font-body text-grey-10">
-            Lorem ipsum dolor sit amet consectetur adipiscing elit hendrerit
-            condimentum turpis nisl sem, viverra habitasse urna ante lobortis
-            fermentum accumsan. Viverra habitasse urna ante lobortis fermentum
-            accumsan.
-          </p>
         </div>
-        <form className="mx-auto w-full pt-10 sm:w-3/4">
+        {/* <form className="mx-auto w-full pt-10 sm:w-3/4">
           <div className="flex flex-col md:flex-row">
             <input className="mr-3 w-full rounded border-grey-50 px-4 py-3 font-body text-black md:w-1/2 lg:mr-5"
               placeholder="Name" type="text" id="name" />
@@ -829,8 +492,8 @@ export default function Home({ blogs }) {
             Send
             <i className="bx bx-chevron-right relative -right-2 text-3xl"></i>
           </button>
-        </form>
-        <div className="flex flex-col pt-16 lg:flex-row">
+        </form> */}
+        <div className="flex flex-col pt-6 lg:flex-row">
           <div className="w-full border-l-2 border-t-2 border-r-2 border-b-2 border-grey-60 px-6 py-6 sm:py-8 lg:w-1/3">
             <div className="flex items-center">
               <i className="bx bx-phone text-2xl text-grey-40"></i>
@@ -839,7 +502,7 @@ export default function Home({ blogs }) {
               </p>
             </div>
             <p className="pt-2 text-left font-body font-bold text-primary lg:text-lg">
-              (+881) 111 222 333
+              {profile.phone}
             </p>
           </div>
           <div
@@ -851,7 +514,7 @@ export default function Home({ blogs }) {
               </p>
             </div>
             <p className="pt-2 text-left font-body font-bold text-primary lg:text-lg">
-              name@mydomain.com
+              {profile.email}
             </p>
           </div>
           <div
@@ -859,20 +522,17 @@ export default function Home({ blogs }) {
             <div className="flex items-center">
               <i className="bx bx-map text-2xl text-grey-40"></i>
               <p className="pl-2 font-body font-bold uppercase text-grey-40 lg:text-lg">
-                My Address
+                My Location
               </p>
             </div>
             <p className="pt-2 text-left font-body font-bold text-primary lg:text-lg">
-              123 New York D Block 1100, 2011 USA
+              {profile.address}
             </p>
           </div>
         </div>
       </div>
 
-      <div className="h-72 bg-cover bg-center bg-no-repeat sm:h-64 md:h-72 lg:h-96"
-        style={{"backgroundImage": "url(/assets/img/map.png)"}}></div>
-
-      <div className="relative bg-primary bg-cover bg-center bg-no-repeat py-16 bg-blend-multiply lg:py-24"
+      <div className="relative bg-primary bg-cover bg-center bg-no-repeat py-16 bg-blend-multiply lg:py-8"
         style={{"backgroundImage": "url(/assets/img/bg-cta.jpg)"}}>
         <div className="container relative z-30">
           <h3
@@ -880,39 +540,18 @@ export default function Home({ blogs }) {
             Keep <span className="font-bold">up-to-date</span> <br />
             with what I'm up to
           </h3>
-          <form className="mt-6 flex flex-col justify-center sm:flex-row">
+          {/* <form className="mt-6 flex flex-col justify-center sm:flex-row">
             <input className="w-full rounded px-4 py-3 font-body text-black sm:w-2/5 sm:py-4 lg:w-1/3" type="text"
               id="email" placeholder="Give me your Email" />
             <button
               className="mt-2 rounded bg-yellow px-8 py-3 font-body text-base font-bold uppercase text-primary transition-colors hover:bg-primary hover:text-white focus:border-transparent focus:outline-none focus:ring focus:ring-yellow sm:ml-2 sm:mt-0 sm:py-4 md:text-lg">
               Join the club
             </button>
-          </form>
+          </form> */}
         </div>
       </div>
     </div><div className="bg-primary">
-          <div className="container flex flex-col justify-between py-6 sm:flex-row">
-            <p className="text-center font-body text-white md:text-left">
-              © Copyright 2022. All right reserved, ATOM.
-            </p>
-            <div className="flex items-center justify-center pt-5 sm:justify-start sm:pt-0">
-              <a href="/">
-                <i className="bx bxl-facebook-square text-2xl text-white hover:text-yellow"></i>
-              </a>
-              <a href="/" className="pl-4">
-                <i className="bx bxl-twitter text-2xl text-white hover:text-yellow"></i>
-              </a>
-              <a href="/" className="pl-4">
-                <i className="bx bxl-dribbble text-2xl text-white hover:text-yellow"></i>
-              </a>
-              <a href="/" className="pl-4">
-                <i className="bx bxl-linkedin text-2xl text-white hover:text-yellow"></i>
-              </a>
-              <a href="/" className="pl-4">
-                <i className="bx bxl-instagram text-2xl text-white hover:text-yellow"></i>
-              </a>
-            </div>
-          </div>
+         
         </div></></>
      
     // <div className="home mx-8">
@@ -944,12 +583,32 @@ export async function getServerSideProps(context) {
     dataset: "production",
     useCdn: false
   });
-  const query = `*[_type == "blog"]`;
+  const query = `*[_type == "blog"][0...3]`;
   const blogs = await client.fetch(query);
-  console.log(blogs.length)
+
+  const profileQuery = `*[_type == "profile"][0]`;
+  const profile = await client.fetch(profileQuery);
+
+  const skillsQuery = `*[_type == "skills"]`;
+  const skills = await client.fetch(skillsQuery);
+
+  const gootAtQuery = `*[_type == "goodAt"]`;
+  const goodAt = await client.fetch(gootAtQuery);
+
+  const myDetailsQuery = `*[_type == "myDetails"]`;
+  const myDetails = await client.fetch(myDetailsQuery);
+
+  const workQuery = `*[_type == "work"]`;
+  const work = await client.fetch(workQuery);
+
   return {
     props: {
-      blogs
+      blogs,
+      profile,
+      skills,
+      goodAt,
+      myDetails,
+      work
     }
   }
 }
