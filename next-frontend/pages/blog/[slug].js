@@ -78,26 +78,26 @@ const Post = ({ blog, profile }) => {
     <NavBar profile={profile} />
 
     <div>
-      <div class="container py-6 md:py-10">
-        <div class="mx-auto max-w-4xl">
-          <div class="">
+      <div className="container py-6 md:py-10">
+        <div className="mx-auto max-w-4xl">
+          <div className="">
             <h1
-              class="pt-5 font-body text-3xl font-semibold text-primary sm:text-4xl md:text-5xl xl:text-6xl">
+              className="pt-5 font-body text-3xl font-semibold text-primary sm:text-4xl md:text-5xl xl:text-6xl">
               {blog.title}
             </h1>
-            <div class="flex items-center pt-5 md:pt-10">
+            <div className="flex items-center pt-5 md:pt-10">
               <div>
                 <img src={builder.image(profile.image).width(200).url()}
-                  class="h-20 w-20 rounded-full border-2 border-grey-70 shadow"
+                  className="h-20 w-20 rounded-full border-2 border-grey-70 shadow"
                   alt="author image" />
               </div>
-              <div class="pl-5">
-                <span class="block font-body text-xl font-bold text-grey-10">{profile.name} </span>
-                <span class="block pt-1 font-body text-xl font-bold text-grey-30">{createdAtDate}</span>
+              <div className="pl-5">
+                <span className="block font-body text-xl font-bold text-grey-10">{profile.name} </span>
+                <span className="block pt-1 font-body text-xl font-bold text-grey-30">{createdAtDate}</span>
               </div>
             </div>
           </div>
-          <div class="prose max-w-none pt-8">
+          <div className="prose max-w-none pt-8">
             <PortableText
               // Pass in block content straight from Sanity.io
               content={blog.content}
