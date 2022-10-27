@@ -91,9 +91,7 @@ export default function Home({ blogs, profile,skills,goodAt,myDetails,work,stati
 
 
       </Head> 
-      <div className='sticky top-0 z-50'>
       <NavBar profile={profile} />
-      </div>
       <div
         className="pointer-events-none fixed inset-0 z-70 min-h-screen bg-black bg-opacity-70 opacity-0 transition-opacity lg:hidden" /> 
       <div className="hidden absolute right-0 min-h-screen w-2/3 bg-primary py-4 px-8 shadow md:w-1/3">
