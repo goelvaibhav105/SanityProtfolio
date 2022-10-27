@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "framer-motion": "^7.6.1"
+    "framer-motion": "^7.6.1",
+    "react-simple-typewriter": "^4.0.5"
   }
 }
